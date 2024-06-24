@@ -2,5 +2,6 @@
 
 aiogram, pgsql, asyncio
 
-main.py - входная точка в программу \n
+main.py - входная точка в программу
+
 app - папка проекта
