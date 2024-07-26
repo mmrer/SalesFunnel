@@ -37,17 +37,53 @@ next_art_7 = InlineKeyboardMarkup(inline_keyboard=[
 ])
 
 next_art_8 = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='Далее', callback_data='next-article-8')]
+    [
+        InlineKeyboardButton(text='Покупка подписки', callback_data='#'),
+        InlineKeyboardButton(text='Что можно купить за 39$', callback_data='what-can-buy')
+    ]
 ])
 
-choice_question = InlineKeyboardMarkup(inline_keyboard=[
+what_can_buy = InlineKeyboardMarkup(inline_keyboard=[
     [
-     InlineKeyboardButton(text='1', callback_data='next-quest-1'),
-     InlineKeyboardButton(text='2', callback_data='next-quest-2'),
-     InlineKeyboardButton(text='3', callback_data='next-quest-3')
+     InlineKeyboardButton(text='Купить подписку', callback_data='#')
+    ],
+    [
+        InlineKeyboardButton(text='Как у вас дела с отзывами? ', callback_data='show-reviews'),
+        InlineKeyboardButton(text='Сколько денег нужно для старта в крипте?', callback_data='how-much-money'),
+        InlineKeyboardButton(text='Подойдет ли это конкретно мне?', callback_data='suit-me')
     ]
-
 ], resize_keyboard=True)
+
+show_reviews = InlineKeyboardMarkup(inline_keyboard=[
+    [
+        InlineKeyboardButton(text="Хочу купить подписку", callback_data='want-buy')
+    ],
+    [
+        InlineKeyboardButton(text="Сколько денег нужно для старта в крипте?", callback_data='how-much-in-ShowRev'),
+        InlineKeyboardButton(text="Подойдет ли это конкретно мне?", callback_data='suit-for-me-in-ShowRev')
+    ]
+], resize_keyboard=True)
+
+how_much = InlineKeyboardMarkup(inline_keyboard=[
+    [
+        InlineKeyboardButton(text="Хочу купить подписку", callback_data='want-buy')
+    ],
+    [
+        InlineKeyboardButton(text="Как у вас дела с отзывами? ", callback_data='how-with-rev-in-HowMuch'),
+        InlineKeyboardButton(text="Подойдет ли это конкретно мне?", callback_data='suit-for-me-in-HowMuch')
+    ]
+], resize_keyboard=True)
+
+suit_me = InlineKeyboardMarkup(inline_keyboard=[
+    [
+        InlineKeyboardButton(text="Хочу купить подписку", callback_data='want-buy')
+    ],
+    [
+        InlineKeyboardButton(text="Как у вас дела с отзывами? ", callback_data='how-with-rev-in-SuitMe'),
+        InlineKeyboardButton(text="Сколько денег нужно для старта в крипте?", callback_data='how-much-in-SuitMe')
+    ]
+], resize_keyboard=True)
+
 
 req_contact = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text='Отправить номер', request_contact=True)],

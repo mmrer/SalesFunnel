@@ -9,33 +9,33 @@ from aiogram.types import CallbackQuery, FSInputFile
 router = Router()
 
 
-#начало
+#Begin
 @router.message(Command("start"))
 async def cmd_start(message: types.Message) -> None:
     """
     This handler receives messages with `/start` command
     """
     if message.chat.type == "private":
-        text = 'Привет! Чтобы активировать бота подпишись на наши <a href="https://t.me/addlist/rlH9GFsdWsowZThi">ресурсы</a>!'
+        text = 'Привет! Чтобы активировать бота подпишись на наши <a href="https://t.me/TestFolderLinks">ресурсы</a>!'
         await message.answer(text, parse_mode="HTML",
                              disable_web_page_preview=True,
                              reply_markup=kb.settings)
 
-#проверка на подписку
+#Check sub
 @router.message(F.text == 'Проверить')
 async def check_subscription(message: types.Message):
-    chat_id_list = ["-1002234927815"]
-    #нужно добавить id групп и добавить бота в администраторы каналов/пабликов
+    chat_id_list = ["-1002216390442", "-1002234927815"]
     status_channel_list = []
 
     for chat_id in chat_id_list:
         chat_member = await message.bot.get_chat_member(chat_id=chat_id, user_id=message.from_user.id)
-        if chat_member.status != 'left':
+        if chat_member.status in ['administrator', 'creator', 'member']:
             status_channel_list.append("+")
         else:
             status_channel_list.append("-")
+
     if "-" in status_channel_list:
-        text = 'Для продолжения необходимо добавить <a href="https://t.me/addlist/rlH9GFsdWsowZThi">папку</a> с ресурсами.'
+        text = 'Для продолжения необходимо добавить все наши <a href="https://t.me/TestFolderLinks">ресурсы</a>.'
         await message.answer(text, parse_mode="HTML",
                              disable_web_page_preview=True,
                              reply_markup=kb.settings
@@ -58,14 +58,14 @@ async def next_article_2(callback: CallbackQuery):
                                   reply_markup=kb.next_art_3
                                   )
 
-#запрос телефона
+#Get phone number
 @router.callback_query(F.data == 'next-article-3')
 async def next_article_3(callback: CallbackQuery):
     text = "У нас осталось для тебя еще несколько бесплатных подарков - чтобы их получить отправь свои контакты.\n"
     await callback.message.answer(text, parse_mode="HTML",
                                   reply_markup=kb.req_contact
                                   )
-#обработка телефона
+#Processing phone
 @router.message(F.contact)
 async def contact_callback(message: types.Message):
     await rq.set_tgid_and_number(message.from_user.id, int(message.contact.phone_number))
@@ -73,7 +73,7 @@ async def contact_callback(message: types.Message):
     await message.answer(text="Спасибо, вот твой <a href='#'>подарок</a>!", parse_mode="HTML",
                          reply_markup=kb.next_art_4)
 
-#пропуск ввода
+#Skip write number
 @router.message(F.text == "Пропустить")
 async def skip_send_number(message: types.Message):
     await message.answer(text="Ввод пропущен", reply_markup=kb.del_keyboard)
@@ -105,23 +105,53 @@ async def next_article_6(callback: CallbackQuery):
 
 @router.callback_query(F.data == 'next-article-7')
 async def next_article_7(callback: CallbackQuery):
-    text = "Ни для кого не секрет, что главным инструментом для заработка денег в криптовалюте является инфополе!\n" \
-            "Мы готовы предоставить тебе наш уникальный инструмент для заработка в криптовалюте стоимостью более 5000$!\n" \
-            "Всего за 29$! + БОНУС ДОСТУП К БИБЛИОТЕКЕ ЗНАНИЙ ПО ВСЕЙ КРИПТЕ В нём собраны самые лучшие приватные сообщества СНГ!\n" \
-            "Владея таким инфополем заработает каждый!"
+    text = "Мы решили скупить доступ во ВСЕ приватные телеграмм сообщества в СНГ для своего комьюнити. Общая стоимость доступа в приватные каналы составляет 1.000.000 рублей /мес\n" \
+            "\n" \
+            "Члены нашего приватного сообщества получают доступ к этой информации, совершенно бесплатно.\n" \
+            "Если у тебя есть желание стать профи в крипте, но ты не можешь позволить стать членом нашего закрытого сообщества. \n" \
+            "\n" \
+            "Мы придумали для тебя решение! \n" \
+            "\n" \
+            "<b>ВСЕГО ЗА 39$</b> \n" \
+           "\n" \
+           "Ты можешь приобрести доступ ко всем закрытым телеграмм сообществам. \n"
     await callback.message.answer(text, parse_mode="HTML",
                                   reply_markup=kb.next_art_8)
 
+@router.callback_query(F.data == 'what-can-buy')
+async def next_article_8(callback: CallbackQuery):
+    text = "Текст, что можно купить на 39$"
+    await callback.message.answer(text, parse_mode="HTML",
+                                  reply_markup=kb.what_can_buy)
+
+
+@router.callback_query(F.data == 'show-reviews')
+async def show_reviews(callback: CallbackQuery):
+    text = "Отзывы"
+    await callback.message.answer(text, parse_mode="HTML",
+                                  reply_markup=kb.show_reviews)
+
+@router.callback_query(F.data == 'how-much-money')
+async def show_reviews(callback: CallbackQuery):
+    text = "Текст. Сколько нужно?"
+    await callback.message.answer(text, parse_mode="HTML",
+                                  reply_markup=kb.how_much)
+
+@router.callback_query(F.data == 'suit-me')
+async def show_reviews(callback: CallbackQuery):
+    text = "Текст. Подойдет ли?"
+    await callback.message.answer(text, parse_mode="HTML",
+                                  reply_markup=kb.suit_me)
+
+
 @router.callback_query(F.data == 'next-article-8')
 async def next_article_8(callback: CallbackQuery):
-    text = "Закрываем отрицание людей\nПочему ты еще не с нами?\n" \
+    text = "Почему ты еще не с нами?\n" \
         "Но возможно, что у тебя остались вопросики.\n" \
         "Выбери тот, который тебя интересует, и я отправлю тебе персональный ответ:\n" \
         "\n" \
         "1. Сколько денег нужно для старта в крипте? - пост\n" \
         "2. А есть ли у вас отзывы ? - переход на отзовик\n" \
-        "3. Подойдет ли это конкретно мне? - 1 конкретный кейс (который закрывает боли большинства нормисо = они должны увидеть себя в этом кейсе)\n" \
-        "\n" \
         "Нажми на цифру интересующего вопроса 👇👇"
     await callback.message.answer(text, parse_mode="HTML",
-                                  reply_markup=kb.choice_question)
+                                  reply_markup=kb.what_can_buy)
