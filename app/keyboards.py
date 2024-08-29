@@ -11,30 +11,29 @@ settings = ReplyKeyboardMarkup(keyboard=[
             resize_keyboard=True,
             one_time_keyboard=True)
 
+read_meme_part1 = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text="ЧИТАТЬ СТАТЬЮ", url="https://t.me/KKrypty/1920")]
+])
 
-next_art_2 = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='Далее', callback_data='next-article-2')]
-], resize_keyboard=True)
+read_meme_part2 = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text="ЧИТАТЬ СТАТЬЮ", url="https://teletype.in/@neekketh/ulitimate_memecoins_guide_pt2")]
+])
 
-next_art_3 = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='Далее', callback_data='next-article-3')]
-], resize_keyboard=True)
+warp = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text="ЧИТАТЬ СТАТЬЮ", url="https://teletype.in/@tovarishrijiy/warpcast")]
+])
 
-next_art_4 = InlineKeyboardMarkup(inline_keyboard=[
+warp_view = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text="СМОТРИ ВИДЕО", url="https://www.youtube.com/watch?v=D9Km1Vy3o5A")]
+])
+number_taken = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text="Далее", callback_data='next-article-4')]
 ])
 
-next_art_5 = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text="Далее", callback_data='next-article-5')]
+video_warp = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text="СМОТРИ ВИДЕО", url="https://www.youtube.com/watch?v=D9Km1Vy3o5A")]
 ])
 
-next_art_6 = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text="Далее", callback_data='next-article-6')]
-])
-
-next_art_7 = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='Далее', callback_data='next-article-7')]
-])
 
 next_art_8 = InlineKeyboardMarkup(inline_keyboard=[
     [
@@ -49,8 +48,7 @@ what_can_buy = InlineKeyboardMarkup(inline_keyboard=[
     ],
     [
         InlineKeyboardButton(text='Как у вас дела с отзывами? ', callback_data='show-reviews'),
-        InlineKeyboardButton(text='Сколько денег нужно для старта в крипте?', callback_data='how-much-money'),
-        InlineKeyboardButton(text='Подойдет ли это конкретно мне?', callback_data='suit-me')
+        InlineKeyboardButton(text='Сколько денег нужно для старта в крипте?', callback_data='how-much-money')
     ]
 ], resize_keyboard=True)
 
@@ -74,16 +72,6 @@ how_much = InlineKeyboardMarkup(inline_keyboard=[
     ]
 ], resize_keyboard=True)
 
-suit_me = InlineKeyboardMarkup(inline_keyboard=[
-    [
-        InlineKeyboardButton(text="Хочу купить подписку", callback_data='want-buy')
-    ],
-    [
-        InlineKeyboardButton(text="Как у вас дела с отзывами? ", callback_data='how-with-rev-in-SuitMe'),
-        InlineKeyboardButton(text="Сколько денег нужно для старта в крипте?", callback_data='how-much-in-SuitMe')
-    ]
-], resize_keyboard=True)
-
 
 req_contact = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text='Отправить номер', request_contact=True)],
@@ -94,4 +82,3 @@ req_contact = ReplyKeyboardMarkup(keyboard=[
 
 
 del_keyboard = ReplyKeyboardRemove()
-
